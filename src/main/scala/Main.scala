@@ -27,15 +27,15 @@ object GuessWho extends App {
   val characters: List[Character] = List(person1, person2, person3, person4, person5, person6, person7, person8, person9)
 
   val questions: List[String] = List(
-    "1. Is their hair colour black?",
-    "2. Is their hair colour brown?",
-    "3. Is their hair colour blonde?",
-    "4. Do they have black eyes?",
-    "5. Do they have blue eyes?",
-    "6. Do they wear glasses?",
-    "7. Do they wear earrings?",
-    "8. Are they male?",
-    "9. Do they have facial hair?"
+    "Is their hair colour black?",
+    "Is their hair colour brown?",
+    "Is their hair colour blonde?",
+    "Do they have black eyes?",
+    "Do they have blue eyes?",
+    "Do they wear glasses?",
+    "Do they wear earrings?",
+    "Are they male?",
+    "Do they have facial hair?"
   )
 
   val questionsMap: Map[Character, Map[Int, Boolean]] = Map(
@@ -145,12 +145,12 @@ object GuessWho extends App {
 
   val selectedCharacter = remainingCharacters(random.nextInt(remainingCharacters.length))
 
-  println(s"The random character chosen is: ${selectedCharacter.name}")
+  println(s" The character to guess is : ${selectedCharacter.name}!")
 
   var askedQuestions = List[Int]()
 
   while (remainingCharacters.length > 1) {
-    println(s"The character pool is: ${remainingCharacters.map(_.name)}")
+    println(s"Characters remaining: ${remainingCharacters.map(_.name)}")
 
     var askQuestion = random.nextInt(questionsMap(selectedCharacter).size) + 1
     if (askedQuestions.contains(askQuestion)){
@@ -158,19 +158,19 @@ object GuessWho extends App {
         askQuestion = random.nextInt(questionsMap(selectedCharacter).size)  + 1
       } while (askedQuestions.contains(askQuestion))
     }
-    askedQuestions =  askQuestion ::askedQuestions
+    askedQuestions =  askQuestion :: askedQuestions
     println(askedQuestions)
 
 
-    println(s"Question number - ${askQuestion}: ${questions(askQuestion-1)}")
+    println(s" ${askQuestion}: ${questions(askQuestion-1)}")
 
-    val userInput = readLine("true or false? ").toLowerCase.trim == "true"
+    val userInput = readLine("True or False? ").toLowerCase.trim == "false"
 
     val newRemainingCharacters = remainingCharacters.filter(character =>
       questionsMap(character)(askQuestion) == userInput)
 
     if (newRemainingCharacters.isEmpty) {
-      println("No characters left that match your criteria.")
+      println("No characters left that match your criteria")
     } else {
       remainingCharacters = newRemainingCharacters
     }
@@ -179,7 +179,7 @@ object GuessWho extends App {
   if (remainingCharacters.nonEmpty) {
     println(s"Your chosen character is ${remainingCharacters.head.name}.")
   } else {
-    println("Cannot determine the character.")
+    println("Cannot determine the chosen character")
   }
 }
 
