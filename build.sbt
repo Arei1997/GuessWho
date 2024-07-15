@@ -6,8 +6,10 @@ ThisBuild / scalaVersion := "2.13.14"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "UnitTestingAfternoonTask"
+    name := "GuessWho"
   )
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.15" % Test,
 )
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
