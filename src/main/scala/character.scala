@@ -75,6 +75,9 @@ object GuessWho extends App {
 
   }
 
+  var characterGameBoard =
+
+
   filterByCharacteristic(1, characters)
 
   def getCharacterNamesAsList(characters:List[Character]): List[String] = {
