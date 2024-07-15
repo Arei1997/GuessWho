@@ -14,14 +14,14 @@ object GuessWho extends App {
                        isMale: Boolean,
                        hasFacialHair: Boolean)
 
-  val person1: Character = Character("James", true, false, false, true, false, true, true, true, true)
-  val person2: Character = Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
+  val person1: Character = Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = false)
+  val person2: Character = Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
   val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
-  val person4: Character = Character("Sarah", false, true, false, false, true, false, true, false, false)
+  val person4: Character = Character("Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = false, hasFacialHair = false)
   val person5: Character = Character("John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = true)
   val person6: Character = Character(name = "Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person7: Character = Character("Michael", true, false, false, true, false, true, false, true, true)
-  val person8: Character = Character("Sophia", false, true, false, false, true, false, true, false, false)
+  val person7: Character = Character(name = "Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = true, hasFacialHair = true)
+  val person8: Character = Character("Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
   val person9: Character = Character("Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
 
   val characters: List[Character] = List(person1, person2, person3, person4, person5, person6, person7, person8, person9)
@@ -144,15 +144,25 @@ object GuessWho extends App {
   var remainingCharacters = characters
 
   val selectedCharacter = remainingCharacters(random.nextInt(remainingCharacters.length))
+
   println(s"The random character chosen is: ${selectedCharacter.name}")
 
+  var askedQuestions = List[Int]()
 
   while (remainingCharacters.length > 1) {
     println(s"The character pool is: ${remainingCharacters.map(_.name)}")
 
-    val askQuestion = random.nextInt(questionsMap(selectedCharacter).size) + 1
+    var askQuestion = random.nextInt(questionsMap(selectedCharacter).size) + 1
+    if (askedQuestions.contains(askQuestion)){
+      do {
+        askQuestion = random.nextInt(questionsMap(selectedCharacter).size)  + 1
+      } while (askedQuestions.contains(askQuestion))
+    }
+    askedQuestions =  askQuestion ::askedQuestions
+    println(askedQuestions)
 
-    println(s"Question number - ${askQuestion}: ${questions(askQuestion - 1)}")
+
+    println(s"Question number - ${askQuestion}: ${questions(askQuestion-1)}")
 
     val userInput = readLine("true or false? ").toLowerCase.trim == "true"
 
