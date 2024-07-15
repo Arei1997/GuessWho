@@ -1,4 +1,5 @@
 import scala.util.Random
+import scala.io.StdIn.readLine
 
 
 
@@ -19,7 +20,7 @@ object GuessWho extends App {
                       )
 
   // Characters as part of the guessing
-  val person1: Character = Character("James", true, false, false, true, false, true, true, true, true, true)
+  val person1: Character = Character("James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
   val person2: Character = Character("Dave", true, false, false, true, false, true, true, true, true, true)
   val person3: Character = Character("Maria", false, true, false, true, false, false, true, false, false, false)
   val person4: Character = Character("Sarah", false, true, false, false, true, false, true, false, false, false)
@@ -76,14 +77,21 @@ object GuessWho extends App {
 
   filterByCharacteristic(1, characters)
 
-  // check if person is in list
-  val justNames = characters.map(_.name)
+  def getCharacterNamesAsList(characters:List[Character]): List[String] = {
+    characters.map(_.name)
+  }
 
-  println(justNames.contains("James"))
 
-  // enumerated names
-  val enumeratedNames: List[String] = justNames.zipWithIndex.map { case (name, index) => s"${index + 1}. $name" }
-  println(enumeratedNames)
+  def enumerateNames(characterList: List[String]): List[String] = {
+    characterList.zipWithIndex.map { case (name, index) => s"${index + 1}. $name" }
+  }
+
+
 
 }
 
+// update the filtered list
+
+// guess character
+// choose a character to guess
+// whoever is remaining make them an option to choose.
