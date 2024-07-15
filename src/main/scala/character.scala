@@ -10,7 +10,7 @@ object GuessWho extends App {
                        hasBlondeHair: Boolean,
                        hasBrownHair: Boolean,
                        hasRedHair: Boolean,
-                       hasBlackEyes: Boolean,
+                       hasBrownEyes: Boolean,
                        hasBlueEyes: Boolean,
                        hasGlasses: Boolean,
                        hasEarRings: Boolean,
@@ -37,7 +37,7 @@ object GuessWho extends App {
     "1. Is their hair colour black?",
     "2. Is their hair colour brown?",
     "3. Is their hair colour blonde?",
-    "4. Is their hair colour red",
+    "4. Is their hair colour red?",
     "5. Do they have brown eyes?",
     "6. Do they have blue eyes?",
     "7. Do they wear glasses?",
@@ -47,118 +47,43 @@ object GuessWho extends App {
     "11. Do they have facial hair?",
   )
 
+  def getRandomCharacter:Character = {
 
-  val questionsMap: Map[Character, Map[Int, Boolean]] = Map(
-    person1 -> Map(
+    characters(Random.nextInt(characters.length))
+  }
 
-      1 -> person1.hasBlackHair,
-      3 -> person1.hasBlondeHair,
-      4 -> person1.hasBrownHair,
-      5 -> person1.hasBlackHair,
-      6 -> person1.hasBlackEyes,
-      7 -> person1.hasBlueEyes,
-      8 -> person1.hasGlasses,
-      9 -> person1.hasEarRings,
-      10 -> person1.isMale,
-      11 -> person1.hasFacialHair,
+  val randomCharacter: Character = getRandomCharacter
 
-    ),
-    person2 -> Map(
-      1 -> person2.hasBlackHair,
-      3 -> person2.hasBlondeHair,
-      4 -> person2.hasBrownHair,
-      5 -> person2.hasBlackHair,
-      6 -> person2.hasBlackEyes,
-      7 -> person2.hasBlueEyes,
-      8 -> person2.hasGlasses,
-      9 -> person2.hasEarRings,
-      10 -> person2.isMale,
-      11 -> person2.hasFacialHair,
-    ),
-    person3 -> Map(
-      1 -> person3.hasBlackHair,
-      3 -> person3.hasBlondeHair,
-      4 -> person3.hasBrownHair,
-      5 -> person3.hasBlackHair,
-      6 -> person3.hasBlackEyes,
-      7 -> person3.hasBlueEyes,
-      8 -> person3.hasGlasses,
-      9 -> person3.hasEarRings,
-      10 -> person3.isMale,
-      11 -> person3.hasFacialHair,
-    ),
-    person4 -> Map(
-      1 -> person4.hasBlackHair,
-      3 -> person4.hasBlondeHair,
-      4 -> person4.hasBrownHair,
-      5 -> person4.hasBlackHair,
-      6 -> person4.hasBlackEyes,
-      7 -> person4.hasBlueEyes,
-      8 -> person4.hasGlasses,
-      9 -> person4.hasEarRings,
-      10 -> person4.isMale,
-      11 -> person4.hasFacialHair,
-    ),
-    person5 -> Map(
-      1 -> person5.hasBlackHair,
-      3 -> person5.hasBlondeHair,
-      4 -> person5.hasBrownHair,
-      5 -> person5.hasBlackHair,
-      6 -> person5.hasBlackEyes,
-      7 -> person5.hasBlueEyes,
-      8 -> person5.hasGlasses,
-      9 -> person5.hasEarRings,
-      10 -> person5.isMale,
-      11 -> person5.hasFacialHair,
-    ),
-    person6 -> Map(
-      1 -> person6.hasBlackHair,
-      3 -> person6.hasBlondeHair,
-      4 -> person6.hasBrownHair,
-      5 -> person6.hasBlackHair,
-      6 -> person6.hasBlackEyes,
-      7 -> person6.hasBlueEyes,
-      8 -> person6.hasGlasses,
-      9 -> person6.hasEarRings,
-      10 -> person6.isMale,
-      11 -> person6.hasFacialHair,
-    ),
-    person7 -> Map(
-      1 -> person7.hasBlackHair,
-      3 -> person7.hasBlondeHair,
-      4 -> person7.hasBrownHair,
-      5 -> person7.hasBlackHair,
-      6 -> person7.hasBlackEyes,
-      7 -> person7.hasBlueEyes,
-      8 -> person7.hasGlasses,
-      9 -> person7.hasEarRings,
-      10 -> person7.isMale,
-      11 -> person7.hasFacialHair,
-    ),
-    person8 -> Map(
-      1 -> person8.hasBlackHair,
-      3 -> person8.hasBlondeHair,
-      4 -> person8.hasBrownHair,
-      5 -> person8.hasBlackHair,
-      6 -> person8.hasBlackEyes,
-      7 -> person8.hasBlueEyes,
-      8 -> person8.hasGlasses,
-      9 -> person8.hasEarRings,
-      10 -> person8.isMale,
-      11 -> person8.hasFacialHair,
-    ),
-    person9 -> Map(
-      1 -> person9.hasBlackHair,
-      3 -> person9.hasBlondeHair,
-      4 -> person9.hasBrownHair,
-      5 -> person9.hasBlackHair,
-      6 -> person9.hasBlackEyes,
-      7 -> person9.hasBlueEyes,
-      8 -> person9.hasGlasses,
-      9 -> person9.hasEarRings,
-      10 -> person9.isMale,
-      11 -> person9.hasFacialHair,
+  def filterByCharacteristic(userInput: Int, characterList:List[Character]): List[Character] = {
+    val questionsMap: Map[Int, List[Character]] = Map(
+      1 -> characterList.filter(_.hasBlackHair),
+      2 -> characterList.filter(_.hasBrownHair),
+      3 -> characterList.filter(_.hasBlondeHair),
+      4 -> characterList.filter(_.hasRedHair),
+      5 -> characterList.filter(_.hasBrownEyes),
+      6 -> characterList.filter(_.hasBlueEyes),
+      7 -> characterList.filter(_.hasGlasses),
+      8 -> characterList.filter(_.hasEarRings),
+      9 -> characterList.filter(_.isMale),
+      10 -> characterList.filter(!_.isMale),
+      11 -> characterList.filter(_.hasFacialHair),
+
     )
-  )
+    questionsMap(userInput)
+
+
+  }
+
+  filterByCharacteristic(1, characters)
+
+  // check if person is in list
+  val justNames = characters.map(_.name)
+
+  println(justNames.contains("James"))
+
+  // enumerated names
+  val enumeratedNames: List[String] = justNames.zipWithIndex.map { case (name, index) => s"${index + 1}. $name" }
+  println(enumeratedNames)
 
 }
+
