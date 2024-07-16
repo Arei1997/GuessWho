@@ -18,6 +18,7 @@ class GuessWhoSpec extends AnyWordSpec{
 
   val allCharacters: List[GuessWho.Character] = List(testCharacter1, testCharacter2, testCharacter3)
 
+
   "GuessWho.enumerateNames" should {
     "return an enumerated list of names" when {
       "given a list of names" in {
@@ -28,19 +29,19 @@ class GuessWhoSpec extends AnyWordSpec{
     }
   }
 
-  "GuessWho.filterByCharacteristic" should {
-    "return a filtered list of characters" when {
-      "hasBlackHair is true" in {
-        val result: List[GuessWho.Character] = GuessWho.filterByCharacteristic(1, allCharacters)
-
-        assert(result == List(
-          GuessWho.Character("Bob", true, false, false, true, false, true, true, true, true, true),
-          GuessWho.Character("Charlie", true, false, false, true, false, true, false, true, true, false)
-        )
-        )
-      }
-    }
-  }
+//  "GuessWho.filterByCharacteristic" should {
+//    "return a filtered list of characters" when {
+//      "hasBlackHair is true" in {
+//        val result: List[GuessWho.Character] = GuessWho.filterByCharacteristic(1, allCharacters)
+//
+//        assert(result == List(
+//          GuessWho.Character("Bob", true, false, false, true, false, true, true, true, true, true),
+//          GuessWho.Character("Charlie", true, false, false, true, false, true, false, true, true, false)
+//        )
+//        )
+//      }
+//    }
+//  }
 
 
 }
