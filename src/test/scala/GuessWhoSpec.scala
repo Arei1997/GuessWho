@@ -1,18 +1,36 @@
-import org.scalatest.matchers.should.Matchers._
-import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.funsuite.AnyFunSuite
 
+class GuessWhoTest extends AnyFunSuite {
 
-class GuessWhoTests extends AnyFunSuite {
+  val characters: List[GuessWho.Character] = List(
+    GuessWho.Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = false),
+    GuessWho.Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true),
+    GuessWho.Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
+  )
 
-  val person1: GuessWho.Character = GuessWho.Character("James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = false)
-  val person2: GuessWho.Character = GuessWho.Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
-  val person3: GuessWho.Character = GuessWho.Character("Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
-  val person4: GuessWho.Character = GuessWho.Character("Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person5: GuessWho.Character = GuessWho.Character("John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = true)
-  val person6: GuessWho.Character = GuessWho.Character("Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person7: GuessWho.Character = GuessWho.Character("Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = true, hasFacialHair = true)
-  val person8: GuessWho.Character = GuessWho.Character("Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
-  val person9: GuessWho.Character = GuessWho.Character("Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
+  test("Character creation should be correct") {
+    assert(characters.head.name == "James")
+    assert(characters(1).isMale)
+    assert(!characters(2).hasFacialHair)
+  }
 
+  test("createQuestionsMap should create correct mapping") {
+    val james = characters.head
+    val questionsMap = GuessWho.createQuestionsMap(james)
+    assert(questionsMap(1) == true)  // hasBlackHair
+    assert(questionsMap(5) == true)  // hasBlueEyes
+    assert(questionsMap(9) == false) // hasFacialHair
+  }
+
+  test("Filter logic should correctly filter characters based on questions") {
+    val james = characters.head
+    val remainingCharacters = characters
+    val questionsMap = GuessWho.createQuestionsMap(james)
+
+    val filteredCharacters = remainingCharacters.filter(character => GuessWho.createQuestionsMap(character)(1) == questionsMap(1))
+
+    assert(filteredCharacters.size == 2) // James and Dave have black hair
+    assert(filteredCharacters.contains(characters.head))
+    assert(filteredCharacters.contains(characters(1)))
+  }
 }
