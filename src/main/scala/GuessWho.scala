@@ -15,14 +15,14 @@ object GuessWho extends App {
                        hasFacialHair: Boolean)
 
   val person1: Character = Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = false)
-  val person2: Character = Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
+  val person2: Character = Character(name = "Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
   val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
-  val person4: Character = Character("Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person5: Character = Character("John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = true)
+  val person4: Character = Character(name = "Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = false, hasFacialHair = false)
+  val person5: Character = Character(name = "John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = true)
   val person6: Character = Character(name = "Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
   val person7: Character = Character(name = "Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = true, hasFacialHair = true)
-  val person8: Character = Character("Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
-  val person9: Character = Character("Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
+  val person8: Character = Character(name = "Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
+  val person9: Character = Character(name = "Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
 
   val characters: List[Character] = List(person1, person2, person3, person4, person5, person6, person7, person8, person9)
 
@@ -38,107 +38,23 @@ object GuessWho extends App {
     "Do they have facial hair?"
   )
 
-  val questionsMap: Map[Character, Map[Int, Boolean]] = Map(
-    person1 -> Map(
-      1 -> person1.hasBlackHair,
-      2 -> person1.hasBrownHair,
-      3 -> person1.hasBlondeHair,
-      4 -> person1.hasBlackEyes,
-      5 -> person1.hasBlueEyes,
-      6 -> person1.hasGlasses,
-      7 -> person1.hasEarRings,
-      8 -> person1.isMale,
-      9 -> person1.hasFacialHair
-    ),
-    person2 -> Map(
-      1 -> person2.hasBlackHair,
-      2 -> person2.hasBrownHair,
-      3 -> person2.hasBlondeHair,
-      4 -> person2.hasBlackEyes,
-      5 -> person2.hasBlueEyes,
-      6 -> person2.hasGlasses,
-      7 -> person2.hasEarRings,
-      8 -> person2.isMale,
-      9 -> person2.hasFacialHair
-    ),
-    person3 -> Map(
-      1 -> person3.hasBlackHair,
-      2 -> person3.hasBrownHair,
-      3 -> person3.hasBlondeHair,
-      4 -> person3.hasBlackEyes,
-      5 -> person3.hasBlueEyes,
-      6 -> person3.hasGlasses,
-      7 -> person3.hasEarRings,
-      8 -> person3.isMale,
-      9 -> person3.hasFacialHair
-    ),
-    person4 -> Map(
-      1 -> person4.hasBlackHair,
-      2 -> person4.hasBrownHair,
-      3 -> person4.hasBlondeHair,
-      4 -> person4.hasBlackEyes,
-      5 -> person4.hasBlueEyes,
-      6 -> person4.hasGlasses,
-      7 -> person4.hasEarRings,
-      8 -> person4.isMale,
-      9 -> person4.hasFacialHair
-    ),
-    person5 -> Map(
-      1 -> person5.hasBlackHair,
-      2 -> person5.hasBrownHair,
-      3 -> person5.hasBlondeHair,
-      4 -> person5.hasBlackEyes,
-      5 -> person5.hasBlueEyes,
-      6 -> person5.hasGlasses,
-      7 -> person5.hasEarRings,
-      8 -> person5.isMale,
-      9 -> person5.hasFacialHair
-    ),
-    person6 -> Map(
-      1 -> person6.hasBlackHair,
-      2 -> person6.hasBrownHair,
-      3 -> person6.hasBlondeHair,
-      4 -> person6.hasBlackEyes,
-      5 -> person6.hasBlueEyes,
-      6 -> person6.hasGlasses,
-      7 -> person6.hasEarRings,
-      8 -> person6.isMale,
-      9 -> person6.hasFacialHair
-    ),
-    person7 -> Map(
-      1 -> person7.hasBlackHair,
-      2 -> person7.hasBrownHair,
-      3 -> person7.hasBlondeHair,
-      4 -> person7.hasBlackEyes,
-      5 -> person7.hasBlueEyes,
-      6 -> person7.hasGlasses,
-      7 -> person7.hasEarRings,
-      8 -> person7.isMale,
-      9 -> person7.hasFacialHair
-    ),
-    person8 -> Map(
-      1 -> person8.hasBlackHair,
-      2 -> person8.hasBrownHair,
-      3 -> person8.hasBlondeHair,
-      4 -> person8.hasBlackEyes,
-      5 -> person8.hasBlueEyes,
-      6 -> person8.hasGlasses,
-      7 -> person8.hasEarRings,
-      8 -> person8.isMale,
-      9 -> person8.hasFacialHair
-    ),
-    person9 -> Map(
-      1 -> person9.hasBlackHair,
-      2 -> person9.hasBrownHair,
-      3 -> person9.hasBlondeHair,
-      4 -> person9.hasBlackEyes,
-      5 -> person9.hasBlueEyes,
-      6 -> person9.hasGlasses,
-      7 -> person9.hasEarRings,
-      8 -> person9.isMale,
-      9 -> person9.hasFacialHair
+  def createQuestionsMap(character: Character): Map[Int, Boolean] = {
+    Map(
+      1 -> character.hasBlackHair,
+      2 -> character.hasBrownHair,
+      3 -> character.hasBlondeHair,
+      4 -> character.hasBlackEyes,
+      5 -> character.hasBlueEyes,
+      6 -> character.hasGlasses,
+      7 -> character.hasEarRings,
+      8 -> character.isMale,
+      9 -> character.hasFacialHair
     )
-  )
+  }
+
+  val questionsMap: Map[Character, Map[Int, Boolean]] = characters.map { character =>
+    character -> createQuestionsMap(character)
+  }.toMap
 
   val random = new Random()
   var remainingCharacters = characters
@@ -164,7 +80,7 @@ object GuessWho extends App {
 
     println(s" ${askQuestion}: ${questions(askQuestion-1)}")
 
-    val userInput = readLine("True or False? ").toLowerCase.trim == "false"
+    val userInput = readLine("True or False? ").toLowerCase.trim == "true"
 
     val newRemainingCharacters = remainingCharacters.filter(character =>
       questionsMap(character)(askQuestion) == userInput)
@@ -182,5 +98,3 @@ object GuessWho extends App {
     println("Cannot determine the chosen character")
   }
 }
-
-//add guess character
