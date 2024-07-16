@@ -4,15 +4,15 @@ import org.scalatest.wordspec.AnyWordSpec
 class GuessWhoSpec extends AnyWordSpec{
 
   val testCharacter1: GuessWho.Character = new GuessWho.Character(
-    "Bob", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false,
-    hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true
+    "Bob", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBrownEyes = true,
+    hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true
   )
   val testCharacter2: GuessWho.Character = new GuessWho.Character(
-    "Anne", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false,
+    "Anne", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBrownEyes = false,
     hasBlueEyes = true, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false
   )
   val testCharacter3: GuessWho.Character = new GuessWho.Character(
-    "Charlie",  hasBlackHair = false, hasBlondeHair = false, hasBrownHair = true, hasRedHair = true, hasBrownEyes = false,
+    "Charlie",  hasBlackHair = false, hasBlondeHair = false, hasBrownHair = true, hasBrownEyes = false,
     hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = false
   )
 
@@ -46,11 +46,8 @@ class GuessWhoSpec extends AnyWordSpec{
       "the chosen character does have black hair" in {
         val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(1, allCharacters, testCharacter1)
 
-        assert(result == (List(
-          GuessWho.Character("Bob", true, false, false, true, false, true, true, true, true, true),
-          ),
-          true)
-        )
+        assert(result == (List(testCharacter1), true))
+
       }
     }
   }
@@ -60,11 +57,7 @@ class GuessWhoSpec extends AnyWordSpec{
       "the chosen character doesn't have black hair" in {
         val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(1, allCharacters, testCharacter2)
 
-        assert(result == (List(
-          GuessWho.Character("Anne", false, true, false, true, false, true, true, false, false, false),
-          GuessWho.Character("Charlie", false, false, true, true, false, true, false, true, true, false)),
-          false)
-        )
+        assert(result == (List(testCharacter2, testCharacter3), false))
       }
     }
   }
@@ -74,10 +67,7 @@ class GuessWhoSpec extends AnyWordSpec{
       "the chosen character has brown hair" in {
         val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(2, allCharacters, testCharacter3)
 
-        assert(result == (List(
-          GuessWho.Character("Charlie", false, false, true, true, false, true, false, true, true, false)),
-          true)
-        )
+        assert(result == (List(testCharacter3), true))
       }
     }
   }
@@ -87,25 +77,90 @@ class GuessWhoSpec extends AnyWordSpec{
       "the chosen character doesn't have brown hair" in {
         val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(2, allCharacters, testCharacter1)
 
+        assert(result == (List(testCharacter1, testCharacter2), false))
+      }
+    }
+  }
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters with blonde hair" when {
+      "the chosen character has blonde hair" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(3, allCharacters, testCharacter2)
+
+        assert(result == (List(testCharacter2), true))
+      }
+    }
+  }
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters without blonde hair" when {
+      "the chosen character doesn't have blonde hair" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(3, allCharacters, testCharacter1)
+
+        assert(result == (List(testCharacter1, testCharacter3), false))
+      }
+    }
+  }
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters with brown eyes" when {
+      "the chosen character has brown eyes" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(4, allCharacters, testCharacter1)
+
         assert(result == (List(
-          GuessWho.Character("Bob", true, false, false, true, false, true, true, true, true, true),
-          GuessWho.Character("Anne", false, true, false, true, false, true, true, false, false, false)),
-          false)
+          testCharacter1),
+          true)
         )
       }
     }
   }
 
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters without brown eyes" when {
+      "the chosen character doesn't have brown eyes" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(4, allCharacters, testCharacter2)
+
+        assert(result == (List(testCharacter2, testCharacter3), false))
+      }
+    }
+  }
 
   "GuessWho.filterByCharacteristic" should {
-    "return a filtered list of characters with brown hair" when {
-      "the chosen character has brown hair" in {
-        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(2, allCharacters, testCharacter3)
+    "return a filtered list of characters with blue eyes" when {
+      "the chosen character has blue eyes" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(5, allCharacters, testCharacter2)
 
-        assert(result == (List(
-          GuessWho.Character("Charlie", false, false, true, true, false, true, false, true, true, false)),
-          true)
-        )
+        assert(result == (List(testCharacter2, testCharacter3), true))
+      }
+    }
+  }
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters without blue eyes" when {
+      "the chosen character doesn't have blue eyes" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(5, allCharacters, testCharacter1)
+
+        assert(result == (List(testCharacter1), false))
+      }
+    }
+  }
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters with glasses" when {
+      "the chosen character has glasses" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(6, allCharacters, testCharacter1)
+
+        assert(result == (List(testCharacter1, testCharacter2), true))
+      }
+    }
+  }
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters without glasses" when {
+      "the chosen character doesn't have glasses" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(6, allCharacters, testCharacter3)
+
+        assert(result == (List(testCharacter3), false))
       }
     }
   }
