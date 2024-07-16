@@ -20,15 +20,21 @@ object GuessWho extends App {
                       )
 
   // Characters as part of the guessing
-  val person1: Character = Character("James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
-  val person2: Character = Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
-  val person3: Character = Character("Maria", false, true, false, true, false, false, true, false, false, false)
-  val person4: Character = Character("Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person5: Character = Character("John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
-  val person6: Character = Character("Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
+  val person1: Character = Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true,
+    hasFacialHair = true
+  )
+  val person2: Character = Character(name = "Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true,
+    hasFacialHair = true
+  )
+  val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
+  val person4: Character = Character(name = "Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
+  val person5: Character = Character(name = "John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
+  val person6: Character = Character(name = "Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
   val person7: Character = Character(name = "Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = false)
-  val person8: Character = Character("Sophia", false, true, false, false, true, false, true, false, false, false)
-  val person9: Character = Character("Daniel", true, false, false, true, false, false, true, true, true, false)
+  val person8: Character = Character(name = "Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
+  val person9: Character = Character(name = "Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = false)
 
 
   val allCharacters: List[Character] = List(person1, person2, person3, person4, person5, person6, person7, person8, person9)
@@ -102,6 +108,7 @@ object GuessWho extends App {
     val userInput = readLine("Enter the number of your question: ").toInt
 
     if (userInput >= 1 && userInput <= 11) {
+      println("FILTERED: ", filterByCharacteristic(userInput, characterBoard, randomCharacter))
       val (filteredBoard, matches) = filterByCharacteristic(userInput, characterBoard, randomCharacter)
       characterBoard = filteredBoard
       println(s"${matches}")
