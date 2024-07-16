@@ -2,7 +2,6 @@ import scala.util.Random
 import scala.io.StdIn.readLine
 
 
-
 object GuessWho extends App {
 
 
@@ -28,13 +27,34 @@ object GuessWho extends App {
     hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true,
     hasFacialHair = true
   )
-  val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person4: Character = Character(name = "Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person5: Character = Character(name = "John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
-  val person6: Character = Character(name = "Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person7: Character = Character(name = "Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = false)
-  val person8: Character = Character(name = "Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false, hasFacialHair = false)
-  val person9: Character = Character(name = "Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = false)
+  val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false,
+      hasFacialHair = false
+  )
+  val person4: Character = Character(name = "Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
+    hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false,
+    hasFacialHair = false
+  )
+  val person5: Character = Character(name = "John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true,
+    hasFacialHair = true
+  )
+  val person6: Character = Character(name = "Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = false, isMale = false,
+    hasFacialHair = false
+  )
+  val person7: Character = Character(name = "Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = true,
+    hasFacialHair = false
+  )
+  val person8: Character = Character(name = "Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
+    hasRedHair = false, hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false,
+    hasFacialHair = false
+  )
+  val person9: Character = Character(name = "Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
+    hasRedHair = true, hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true,
+    hasFacialHair = false
+  )
 
 
   val allCharacters: List[Character] = List(person1, person2, person3, person4, person5, person6, person7, person8, person9)
@@ -55,7 +75,7 @@ object GuessWho extends App {
     "12. Guess the character",
   )
 
-  def getRandomCharacter:Character = {
+  def getRandomCharacter: Character = {
 
     allCharacters(Random.nextInt(allCharacters.length))
   }
@@ -80,8 +100,7 @@ object GuessWho extends App {
   }
 
 
-
-  def getCharacterNamesAsList(characters:List[Character]): List[String] = {
+  def getCharacterNamesAsList(characters: List[Character]): List[String] = {
     characters.map(_.name)
   }
 
@@ -108,7 +127,6 @@ object GuessWho extends App {
     val userInput = readLine("Enter the number of your question: ").toInt
 
     if (userInput >= 1 && userInput <= 11) {
-      println("FILTERED: ", filterByCharacteristic(userInput, characterBoard, randomCharacter))
       val (filteredBoard, matches) = filterByCharacteristic(userInput, characterBoard, randomCharacter)
       characterBoard = filteredBoard
       println(s"${matches}")

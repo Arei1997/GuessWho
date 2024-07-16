@@ -29,6 +29,18 @@ class GuessWhoSpec extends AnyWordSpec{
     }
   }
 
+  "GuessWho.getCharacterNamesAsList" should {
+    "just the names of all the characters in the character class list" when {
+      "given the list of all character classes" in {
+        val result: List[String] = GuessWho.getCharacterNamesAsList(allCharacters)
+
+        assert(result == List("Bob", "Anne", "Charlie")
+        )
+      }
+    }
+  }
+
+  // filter by chracteristic
   "GuessWho.filterByCharacteristic" should {
     "return a filtered list of characters with black hair" when {
       "the chosen character does have black hair" in {
@@ -59,7 +71,7 @@ class GuessWhoSpec extends AnyWordSpec{
 
   "GuessWho.filterByCharacteristic" should {
     "return a filtered list of characters with brown hair" when {
-      "hasBrownHair is true" in {
+      "the chosen character has brown hair" in {
         val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(2, allCharacters, testCharacter3)
 
         assert(result == (List(
@@ -70,4 +82,31 @@ class GuessWhoSpec extends AnyWordSpec{
     }
   }
 
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters without brown hair" when {
+      "the chosen character doesn't have brown hair" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(2, allCharacters, testCharacter1)
+
+        assert(result == (List(
+          GuessWho.Character("Bob", true, false, false, true, false, true, true, true, true, true),
+          GuessWho.Character("Anne", false, true, false, true, false, true, true, false, false, false)),
+          false)
+        )
+      }
+    }
+  }
+
+
+  "GuessWho.filterByCharacteristic" should {
+    "return a filtered list of characters with brown hair" when {
+      "the chosen character has brown hair" in {
+        val result: (List[GuessWho.Character], Boolean) = GuessWho.filterByCharacteristic(2, allCharacters, testCharacter3)
+
+        assert(result == (List(
+          GuessWho.Character("Charlie", false, false, true, true, false, true, false, true, true, false)),
+          true)
+        )
+      }
+    }
+  }
 }
