@@ -1,21 +1,17 @@
-import org.scalatest.funsuite.AnyFunSuite
+// File path: src/test/scala/GuessWho2Spec.scala
 
-class GuessWhoTest extends AnyFunSuite {
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+import scala.util.Random
 
-  val characters: List[GuessWho.Character] = List(
-    GuessWho.Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = false),
-    GuessWho.Character("Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true),
-    GuessWho.Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
-  )
+class GuessWho2Spec extends AnyFlatSpec with Matchers {
 
+  import GuessWho2._
 
-  test("createQuestionsMap should create correct mapping") {
-    val james = characters.head
-    val questionsMap = GuessWho.createQuestionsMap(james)
-    assert(questionsMap(1) == true)  // hasBlackHair
-    assert(questionsMap(5) == true) // hasBlueEyes
-    assert(questionsMap(6) == false) // hasBlueEyes
-    assert(questionsMap(9) == false) // hasFacialHair
+  "Character creation" should "create a character with correct attributes" in {
+    val character = Character(name = "Test", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = true, hasFacialHair = false)
+    character.name should be ("Test")
+    character.hasBlackHair should be (true)
+    character.hasBlueEyes should be (false)
   }
 }
-

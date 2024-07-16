@@ -1,7 +1,7 @@
 import scala.util.Random
 import scala.io.StdIn.readLine
 
-object GuessWho extends App {
+object GuessWho2 extends App {
 
   case class Character(name: String,
                        hasBlackHair: Boolean,
@@ -15,7 +15,7 @@ object GuessWho extends App {
                        hasFacialHair: Boolean)
 
   val person1: Character = Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = false)
-  val person2: Character = Character(name = "Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
+  val person2: Character = Character(name = "Dave", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true, hasFacialHair = true)
   val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
   val person4: Character = Character(name = "Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = false, hasFacialHair = false)
   val person5: Character = Character(name = "John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = false, isMale = true, hasFacialHair = true)
@@ -24,6 +24,8 @@ object GuessWho extends App {
   val person8: Character = Character(name = "Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false, hasBlackEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = false, hasFacialHair = false)
   val person9: Character = Character(name = "Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false, hasBlackEyes = true, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true, hasFacialHair = true)
 
+
+  //List of all characters
   val characters: List[Character] = List(person1, person2, person3, person4, person5, person6, person7, person8, person9)
 
   val questions: List[String] = List(
@@ -56,41 +58,32 @@ object GuessWho extends App {
     character -> createQuestionsMap(character)
   }.toMap
 
-
-
-  def getRandomCharacter(character: List[Character]):Character ={
+  def getRandomCharacter(character: List[Character]): Character = {
     val random = new Random()
     character(random.nextInt(character.length))
   }
 
-
-  val random = new Random()
+  // val random = new Random()
   var remainingCharacters = characters
   val selectedCharacter = getRandomCharacter(characters)
-  // println("RANDOM",selectedCharacter)
-  println(s" The character is : ${selectedCharacter.name}!")
+  println(s"The character is: ${selectedCharacter.name}!")
 
-  var askedQuestions = List[Int]()
-
-
-
-
-
-
+  //var askedQuestions = List[Int]()
 
   while (remainingCharacters.length > 1) {
     println(s"Characters remaining: ${remainingCharacters.map(_.name)}")
-    var askQuestion = random.nextInt(questionsMap(selectedCharacter).size) + 1
-    if (askedQuestions.contains(askQuestion)){
-      do {
-        askQuestion = random.nextInt(questionsMap(selectedCharacter).size)  + 1
-      } while (askedQuestions.contains(askQuestion))
-    }
-    askedQuestions =  askQuestion :: askedQuestions
-    println(s" ${askQuestion}: ${questions(askQuestion-1)}")
-    val userInput = readLine("True or False? ").toLowerCase.trim == "true"
-    val newRemainingCharacters = remainingCharacters.filter(character =>
-      questionsMap(character)(askQuestion) == userInput)
+    println("Choose a question to ask:")
+    questions.zipWithIndex.foreach { case (question, index) => println(s"${index + 1}: $question") }
+
+    val askQuestion = readLine("Enter the number of your question: ").toInt
+    //askedQuestions = askQuestion :: askedQuestions
+    println(s"${askQuestion}: ${questions(askQuestion - 1)}")
+    val answer = questionsMap(selectedCharacter)(askQuestion)
+    println(s"Answer: $answer")
+
+     var newRemainingCharacters = remainingCharacters.filter(character =>
+      questionsMap(character)(askQuestion) == answer)
+
     if (newRemainingCharacters.isEmpty) {
       println("No characters left that match your criteria")
     } else {
