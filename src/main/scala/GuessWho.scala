@@ -107,39 +107,42 @@ object GuessWho extends App {
   }
 
   val randomCharacter: Character = getRandomCharacter
-
-  var characterBoard = allCharacters
-  var isGameOver = false
-
   println("Welcome to Guess Who!")
   println("Try to guess the character by asking questions.")
   println(randomCharacter)
-  println(enumerateNames(getCharacterNamesAsList(characterBoard)).mkString("\n"))
 
-  while (!isGameOver) {
 
-    println("\nQuestions:")
-    questions.foreach(println)
+  // Function gameLoop takes in the current character board (list of characters) and the randomly chosen character
+  def gameLoop(characterBoard:List[Character],randomCharacter:Character):String = {
+    // Print the enumerated list of character names
+    println(enumerateNames(getCharacterNamesAsList(characterBoard)).mkString("\n"))
 
-    val userInput = readLine("Enter the number of your question: ").toInt
+      println("\nQuestions:")
+      questions.foreach(println)
 
-    if (userInput >= 1 && userInput <= 10) {
-      val (filteredBoard, matches) = filterByCharacteristic(userInput, characterBoard, randomCharacter)
-      characterBoard = filteredBoard
-      println(s"${matches}")
-      println(s"Characters remaining: ${characterBoard.map(_.name).mkString(", ")}")
-    } else if (userInput == 11) {
-      val guess = readLine("Enter the name of the character you want to guess: ")
-      if (guess.equalsIgnoreCase(randomCharacter.name)) {
-        println(s"Congratulations! You guessed correctly. The character was ${randomCharacter.name}.")
-        isGameOver = true
+      val userInput = readLine("Enter the number of your question: ").toInt
+
+      if (userInput >= 1 && userInput <= 10) {
+        val (filteredBoard, matches) = filterByCharacteristic(userInput, characterBoard, randomCharacter)
+        println(s"${matches}")
+        println(s"Characters remaining: ${characterBoard.map(_.name).mkString(", ")}")
+        // Recursively call gameLoop with the filtered board
+        gameLoop(filteredBoard,randomCharacter)
+
+      } else if (userInput == 11) {
+        val guess = readLine("Enter the name of the character you want to guess: ")
+        // Check if the user's guess is correct
+        if (guess.equalsIgnoreCase(randomCharacter.name)) {
+          s"Congratulations! You guessed correctly. The character was ${randomCharacter.name}."
+        } else {
+          s"Wrong guess! The character is not $guess."
+        }
+
       } else {
-        println(s"Wrong guess! The character is not $guess.")
+        println("Invalid input. Please enter a number between 1 and 12.")
+        gameLoop(characterBoard, randomCharacter)
       }
-    } else {
-      println("Invalid input. Please enter a number between 1 and 12.")
-    }
 
   }
-
+  println(gameLoop(allCharacters,randomCharacter))
 }
