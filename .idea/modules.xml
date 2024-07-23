@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GuessWhoScala.iml" filepath="$PROJECT_DIR$/.idea/modules/GuessWhoScala.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GuessWhoScala.GuessWhoScala-build.iml" filepath="$PROJECT_DIR$/.idea/modules/GuessWhoScala.GuessWhoScala-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GuessWho.iml" filepath="$PROJECT_DIR$/.idea/modules/GuessWho.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GuessWho.GuessWho-build.iml" filepath="$PROJECT_DIR$/.idea/modules/GuessWho.GuessWho-build.iml" />
     </modules>
   </component>
 </project>
