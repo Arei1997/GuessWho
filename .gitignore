@@ -37,5 +37,7 @@ target
 test-result
 tmp
 .vscode/
+Misc/
 
 !/src/main/scala/testChar.sc
+/Misc/
