@@ -4,13 +4,22 @@ import scala.io.StdIn.readLine
 
 object GuessWho extends App {
 
+  sealed trait HairColour
+  object HairColour{
+    case object Brown extends HairColour
+    case object Black extends HairColour
+    case object Blonde extends HairColour
+  }
+
+  sealed trait EyeColour
+  object EyeColour {
+    case object Brown extends EyeColour
+    case object Blue extends EyeColour
+  }
 
   case class Character(name: String,
-                       hasBlackHair: Boolean,
-                       hasBlondeHair: Boolean,
-                       hasBrownHair: Boolean,
-                       hasBrownEyes: Boolean,
-                       hasBlueEyes: Boolean,
+                       hairColour: HairColour,
+                       eyeColour: EyeColour,
                        hasGlasses: Boolean,
                        hasEarRings: Boolean,
                        isMale: Boolean,
@@ -18,40 +27,40 @@ object GuessWho extends App {
                       )
 
   // Characters as part of the guessing
-  val person1: Character = Character(name = "James", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
-    hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true,
+  val person1: Character = Character(name = "James", hairColour = HairColour.Black,
+    eyeColour = EyeColour.Blue, hasGlasses = true, hasEarRings = true, isMale = true,
     hasFacialHair = true
   )
-  val person2: Character = Character(name = "Dave", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
-    hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = true, isMale = true,
+  val person2: Character = Character(name = "Dave", hairColour = HairColour.Black,
+    eyeColour = EyeColour.Blue, hasGlasses = true, hasEarRings = true, isMale = true,
     hasFacialHair = true
   )
-  val person3: Character = Character(name = "Maria", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
-   hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false,
+  val person3: Character = Character(name = "Maria", hairColour = HairColour.Blonde,
+   eyeColour = EyeColour.Brown, hasGlasses = true, hasEarRings = false, isMale = false,
       hasFacialHair = false
   )
-  val person4: Character = Character(name = "Sarah", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
-     hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false,
+  val person4: Character = Character(name = "Sarah", hairColour = HairColour.Blonde,
+     eyeColour = EyeColour.Brown, hasGlasses = true, hasEarRings = false, isMale = false,
     hasFacialHair = false
   )
-  val person5: Character = Character(name = "John", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
-     hasBrownEyes = false, hasBlueEyes = false, hasGlasses = false, hasEarRings = true, isMale = true,
+  val person5: Character = Character(name = "John", hairColour = HairColour.Black,
+    eyeColour = EyeColour.Brown, hasGlasses = false, hasEarRings = true, isMale = true,
     hasFacialHair = true
   )
-  val person6: Character = Character(name = "Emma", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
-     hasBrownEyes = false, hasBlueEyes = true, hasGlasses = true, hasEarRings = false, isMale = false,
+  val person6: Character = Character(name = "Emma", hairColour = HairColour.Brown,
+    eyeColour = EyeColour.Blue, hasGlasses = true, hasEarRings = false, isMale = false,
     hasFacialHair = false
   )
-  val person7: Character = Character(name = "Michael", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
-    hasBrownEyes = false, hasBlueEyes = true, hasGlasses = false, hasEarRings = true, isMale = true,
+  val person7: Character = Character(name = "Michael", hairColour = HairColour.Brown,
+    eyeColour = EyeColour.Blue, hasGlasses = false, hasEarRings = true, isMale = true,
     hasFacialHair = false
   )
-  val person8: Character = Character(name = "Sophia", hasBlackHair = false, hasBlondeHair = true, hasBrownHair = false,
-    hasBrownEyes = true, hasBlueEyes = false, hasGlasses = true, hasEarRings = false, isMale = false,
+  val person8: Character = Character(name = "Sophia", hairColour = HairColour.Blonde,
+    eyeColour = EyeColour.Brown, hasGlasses = true, hasEarRings = false, isMale = false,
     hasFacialHair = false
   )
-  val person9: Character = Character(name = "Daniel", hasBlackHair = true, hasBlondeHair = false, hasBrownHair = false,
-   hasBrownEyes = false, hasBlueEyes = false, hasGlasses = true, hasEarRings = true, isMale = true,
+  val person9: Character = Character(name = "Daniel", hairColour = HairColour.Brown,
+   eyeColour = EyeColour.Brown, hasGlasses = true, hasEarRings = true, isMale = true,
     hasFacialHair = false
   )
 
@@ -81,11 +90,11 @@ object GuessWho extends App {
 
   def filterByCharacteristic(userInput: Int, characterList: List[Character], randomCharacter: Character): (List[Character], Boolean) = {
     val (filteredCharacters, matchesCharacteristic) = userInput match {
-      case 1 => (characterList.filter(_.hasBlackHair == randomCharacter.hasBlackHair), randomCharacter.hasBlackHair)
-      case 2 => (characterList.filter(_.hasBrownHair == randomCharacter.hasBrownHair), randomCharacter.hasBrownHair)
-      case 3 => (characterList.filter(_.hasBlondeHair == randomCharacter.hasBlondeHair), randomCharacter.hasBlondeHair)
-      case 4 => (characterList.filter(_.hasBrownEyes == randomCharacter.hasBrownEyes), randomCharacter.hasBrownEyes)
-      case 5 => (characterList.filter(_.hasBlueEyes == randomCharacter.hasBlueEyes), randomCharacter.hasBlueEyes)
+      case 1 => (characterList.filter(_.hairColour == randomCharacter.hairColour), randomCharacter.hairColour == HairColour.Black)
+      case 2 => (characterList.filter(_.hairColour == randomCharacter.hairColour), randomCharacter.hairColour == HairColour.Brown)
+      case 3 => (characterList.filter(_.hairColour == randomCharacter.hairColour), randomCharacter.hairColour == HairColour.Blonde)
+      case 4 => (characterList.filter(_.eyeColour == randomCharacter.eyeColour), randomCharacter.eyeColour == EyeColour.Brown)
+      case 5 => (characterList.filter(_.eyeColour == randomCharacter.eyeColour), randomCharacter.eyeColour == EyeColour.Blue)
       case 6 => (characterList.filter(_.hasGlasses == randomCharacter.hasGlasses), randomCharacter.hasGlasses)
       case 7 => (characterList.filter(_.hasEarRings == randomCharacter.hasEarRings), randomCharacter.hasEarRings)
       case 8 => (characterList.filter(_.isMale == randomCharacter.isMale), randomCharacter.isMale)
