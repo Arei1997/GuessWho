@@ -84,7 +84,6 @@ object GuessWho extends App {
   val randomCharacter: Character = getRandomCharacter
   println("Welcome to Guess Who!")
   println("Try to guess the character by asking questions.")
-  println(randomCharacter) // For testing, you might want to hide this in actual gameplay
 
   // Function gameLoop takes in the current character board (list of characters) and the randomly chosen character
   def gameLoop(characterBoard: List[Character], randomCharacter: Character): String = {
@@ -97,7 +96,7 @@ object GuessWho extends App {
     val userInput = readLine("Enter the number of your question: ")
 
     // Added input validation
-    if (userInput.matches("\\d+") && userInput.toInt >= 1 && userInput.toInt <= 11) {
+    if (userInput.toInt >= 1 && userInput.toInt <= 10) { {
       val input = userInput.toInt
 
       if (input == 11) {
@@ -119,6 +118,7 @@ object GuessWho extends App {
           gameLoop(filteredBoard, randomCharacter)
         }
       }
+    }
     } else {
       println("Invalid input. Please enter a number between 1 and 11.")
       gameLoop(characterBoard, randomCharacter)
