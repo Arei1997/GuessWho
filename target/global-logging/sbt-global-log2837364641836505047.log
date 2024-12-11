@@ -1,0 +1,13 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(;run ;the ;program, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(run, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / run[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 12 Jul 2024, 13:56:04[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(the, None, None)[0m
+[0m[[0m[31merror[0m] [0m[0mNot a valid command: the (similar: help, shell, set)[0m
+[0m[[0m[31merror[0m] [0m[0mNot a valid project ID: the[0m
+[0m[[0m[31merror[0m] [0m[0mExpected ':'[0m
+[0m[[0m[31merror[0m] [0m[0mNot a valid key: the (similar: test, watched, state)[0m
+[0m[[0m[31merror[0m] [0m[0mthe[0m
+[0m[[0m[31merror[0m] [0m[0m   ^[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
